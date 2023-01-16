@@ -1,23 +1,20 @@
+import 'package:flutter/foundation.dart';
+
 class Recipe {
-  String? foodName;
-  String? images;
+  String? name;
   String? totalTime;
-  int? rating;
-  Recipe({
-    this.foodName,
-    this.totalTime,
-    this.rating,
-    this.images,
-  });
-  factory Recipe.fromJson(dynamic json) {
+  String? images;
+  int? ratings;
+  Recipe({this.totalTime,this.images,this.name,this.ratings});
+  factory Recipe.fromJson(dynamic json){
     return Recipe(
-      foodName: json['name'] as String,
+      name: json['name'] as String,
       totalTime: json['totalTime'] as String,
-      images: json['images'][0] as String,
-      rating: json['rating'] as int,
+      images: json['images'][0]['hostedLargeUrl'] as String,
+      ratings: json['rating'] as int,
     );
   }
-  static List<Recipe> recipeFromSnapshot(List snapshot) {
-    return snapshot.map((data) => Recipe.fromJson(data)).toList();
+  static List<Recipe> recipeFromJson(List snapShot){
+    return snapShot.map((e) => Recipe.fromJson(e)).toList();
   }
 }

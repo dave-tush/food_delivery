@@ -3,9 +3,11 @@ import 'package:food_delivery/Pages/HomePages/home_page_1.dart';
 import 'package:food_delivery/Pages/HomePages/home_page_2.dart';
 import 'package:food_delivery/Pages/HomePages/home_page_3.dart';
 import 'package:food_delivery/Pages/scroll_behaviour.dart';
+import 'package:food_delivery/models/receipe.dart';
 import 'package:food_delivery/widgets/colors.dart';
 import 'package:food_delivery/widgets/navbar.dart';
 
+import '../../models/recipe_api.dart';
 import 'home_page_4.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -20,9 +22,19 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
-
 class _MyHomePageState extends State<MyHomePage> {
+   List<Recipe>? recipes;
+  var newRecipeApi = RecipeApi();
   int currentIndex = 0;
+  @override
+  void initState() {
+    super.initState();
+    getRecipes();
+  }
+  Future<void> getRecipes() async {
+    recipes = await newRecipeApi.getRecipe();
+    print(recipes);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
