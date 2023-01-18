@@ -23,17 +23,21 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 class _MyHomePageState extends State<MyHomePage> {
-   List<Recipe>? recipes;
+   // List<Recipe> recipes = Recipe() as List<Recipe>;
   var newRecipeApi = RecipeApi();
   int currentIndex = 0;
   @override
   void initState() {
     super.initState();
-    getRecipes();
+    getNewRecipes();
+  }
+  getNewRecipes (){
+   var recipes = newRecipeApi.getRecipe();
+   print(recipes);
   }
   Future<void> getRecipes() async {
-    recipes = await newRecipeApi.getRecipe();
-    print(recipes);
+
+    // print(recipes);
   }
   @override
   Widget build(BuildContext context) {
@@ -55,7 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
               Icons.home_filled,
               color: ColorsToBeUsed().placeHolderColor,
             ),
-            label: 'Restaurants',
+            label:
+            'Restaurants',
             backgroundColor: Colors.pink,
             activeIcon:
                 Icon(Icons.home_filled, color: ColorsToBeUsed().primaryColor),

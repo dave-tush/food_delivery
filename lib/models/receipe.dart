@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+
+@immutable
 class Recipe {
   String? name;
   String? totalTime;
@@ -8,13 +10,17 @@ class Recipe {
   Recipe({this.totalTime,this.images,this.name,this.ratings});
   factory Recipe.fromJson(dynamic json){
     return Recipe(
-      name: json['name'] as String,
-      totalTime: json['totalTime'] as String,
-      images: json['images'][0]['hostedLargeUrl'] as String,
-      ratings: json['rating'] as int,
+      name: json['name'] as String?,
+      totalTime: json['totalTime'] as String?,
+      images: json['images'][0]['hostedLargeUrl'] as String?,
+      ratings: json['rating'] as int?,
     );
   }
   static List<Recipe> recipeFromJson(List snapShot){
     return snapShot.map((e) => Recipe.fromJson(e)).toList();
+  }
+  @override
+  String toString(){
+    return 'Recipe{name: $name, totalTime: $totalTime, images: $images, rating: $ratings}';
   }
 }
