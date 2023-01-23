@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       theme: theme(),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      initialRoute: '/Iconns',
+      initialRoute: '/',
       routes: {
         '/': (context) => MyHomePage(),
         '/Iconns': (context) => const Iconns(),

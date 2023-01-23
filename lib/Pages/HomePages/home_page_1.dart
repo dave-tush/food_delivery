@@ -21,11 +21,23 @@ class HomePage1 extends StatefulWidget {
   @override
   State<HomePage1> createState() => _HomePage1State();
 }
-
 class _HomePage1State extends State<HomePage1> {
   @override
+  void initState(){
+    super.initState();
+    loadData();
+  }
+  bool? isLoading;
+  Future loadData() async {
+    setState(() => isLoading = true);
+    await Future.delayed(Duration(seconds: 1), (){});
+    setState(() {
+      isLoading = false;
+    });
+
+  }
+  @override
   Widget build(BuildContext context) {
-    bool isLoading = false;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 90.0,
@@ -58,7 +70,9 @@ class _HomePage1State extends State<HomePage1> {
       body: SingleChildScrollView(
         child: ScrollConfiguration(
           behavior: NoGlowBehaviour(),
-          child: isLoading == true ? ShimmerPage() : foodMainPage(),
+          child:
+          // Visibility(visible: false,child: Container(),replacement: const Text('hello world'),),
+          isLoading!  ? ShimmerPage() : foodMainPage(),
         ),
       ),
     );
