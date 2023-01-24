@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import 'HomePages/home_page_1.dart';
+import '../widgets/containers.dart';
 
 class ShimmerPage extends StatelessWidget {
   final baseColor = Colors.grey.withOpacity(0.9);
