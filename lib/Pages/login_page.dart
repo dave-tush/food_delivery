@@ -47,6 +47,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  bool showCircleProgressIndicator = true;
     bool _passwordVisible = false;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -66,7 +67,7 @@ class _LoginState extends State<Login> {
         child: Padding(
           padding: EdgeInsets.symmetric(
               vertical: MediaQueryOfHeight * 0.12,
-              horizontal: MediaQueryOfHeight * 0.025),
+              horizontal: MediaQueryOfHeight * 0.025,),
           child: Column(
             children: [
               Text(
@@ -74,13 +75,13 @@ class _LoginState extends State<Login> {
                 style: TextStyle(
                     color: Colors.deepPurple,
                     fontWeight: FontWeight.bold,
-                    fontSize: MediaQueryOfHeight * 0.04),
+                    fontSize: MediaQueryOfHeight * 0.03),
               ),
               Text(
                 'Eat healthy and save time',
                 style: TextStyle(
                   color: Colors.black26,
-                  fontSize: MediaQueryOfHeight * 0.02,
+                  fontSize: MediaQueryOfHeight * 0.017,
                 ),
               ),
               SizedBox(
@@ -215,11 +216,34 @@ class _LoginState extends State<Login> {
                 ),
               ),
               SizedBox(height: MediaQueryOfHeight * 0.03),
-              Buttons(
-                  text: 'Login',
-                  color: ColorsToBeUsed().mainFontColor,
-                  pressedButton: signIn,
-                  buttonColor: ColorsToBeUsed().mainColor),
+              Material(
+                borderRadius: BorderRadius.circular(10.0),
+                color: ColorsToBeUsed().mainColor,
+                child: InkWell(
+                  onTap: signIn,
+                  child: Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.015,
+                        bottom: MediaQuery.of(context).size.height * 0.015,
+                      ),
+                      child: showCircleProgressIndicator == true ? Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          fontSize: MediaQuery.of(context).size.height * 0.022,
+                          fontWeight: FontWeight.bold,
+                          color: ColorsToBeUsed().mainFontColor,
+                        ),
+                      ) : CircularProgressIndicator(color: Colors.pink,),
+                    ),
+                  ),
+                ),
+              ),
+              // Buttons(
+              //     text: 'Login',
+              //     color: ColorsToBeUsed().mainFontColor,
+              //     pressedButton: signIn,
+              //     buttonColor: ColorsToBeUsed().mainColor),
               SizedBox(
                 height: MediaQueryOfHeight * 0.025,
               ),
@@ -246,7 +270,7 @@ class _LoginState extends State<Login> {
                   Text(
                     "Don't have an account? ",
                     style: TextStyle(
-                      fontSize: MediaQueryOfHeight * 0.025,
+                      fontSize: MediaQueryOfHeight * 0.022,
                       color: ColorsToBeUsed().mainFontColor,
                     ),
                   ),
