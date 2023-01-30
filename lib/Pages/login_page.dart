@@ -228,22 +228,17 @@ class _LoginState extends State<Login> {
                         bottom: MediaQuery.of(context).size.height * 0.015,
                       ),
                       child: showCircleProgressIndicator == true ? Text(
-                        'Sign Up',
+                        'Login',
                         style: TextStyle(
                           fontSize: MediaQuery.of(context).size.height * 0.022,
                           fontWeight: FontWeight.bold,
                           color: ColorsToBeUsed().mainFontColor,
                         ),
-                      ) : CircularProgressIndicator(color: Colors.pink,),
+                      ) :  CircularProgressIndicator(color: ColorsToBeUsed().primaryColor,),
                     ),
                   ),
                 ),
               ),
-              // Buttons(
-              //     text: 'Login',
-              //     color: ColorsToBeUsed().mainFontColor,
-              //     pressedButton: signIn,
-              //     buttonColor: ColorsToBeUsed().mainColor),
               SizedBox(
                 height: MediaQueryOfHeight * 0.025,
               ),
@@ -301,12 +296,10 @@ class _LoginState extends State<Login> {
 
   Future signIn() async {
     if (formKey.currentState!.validate()) {
-      showDialog(
-        context: context,
-        builder: (context) =>  Center(
-          child: CircularProgressIndicator(color: ColorsToBeUsed().mainColor,),
-        ),
-      );
+      setState(() {
+        showCircleProgressIndicator = false;
+      });
+       // CircularProgressIndicator(color: ColorsToBeUsed().mainColor,);
       // Navigator.of(context).pushNamed('/');
       try {
         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -317,7 +310,7 @@ class _LoginState extends State<Login> {
         // print('Signed in');
         // });
       } on FirebaseAuthException catch (e) {
-        return '${e.toString()}';
+        return e.toString();
         // print(${error});
       }
     } else {
@@ -327,8 +320,8 @@ class _LoginState extends State<Login> {
   }
   Future SignInWithFacebook () async {
     showDialog(context: context, builder: (context) =>
-    Center(
-      child: CircularProgressIndicator(color: ColorsToBeUsed().mainColor,),
+    const Center(
+      child: CircularProgressIndicator(color: Colors.blue,),
     )
     );
     // try {
