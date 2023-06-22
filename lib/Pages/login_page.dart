@@ -52,16 +52,15 @@ class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   @override
-  // void dispose() {
-  //   emailController.dispose();
-  //   passwordController.dispose();
-  //
-  //   super.dispose();
-  // }
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+
+    super.dispose();
+  }
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final MediaQueryOfHeight = MediaQuery.of(context).size.height;
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
@@ -257,7 +256,7 @@ class _LoginState extends State<Login> {
                   pressedButton: SignInWithFacebook,
                   buttonColor: Colors.blue[700]),
               SizedBox(
-                height: MediaQueryOfHeight * 0.08,
+                height: 700,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

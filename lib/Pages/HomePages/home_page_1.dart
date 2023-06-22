@@ -16,11 +16,18 @@ class HomePage1 extends StatefulWidget {
   State<HomePage1> createState() => _HomePage1State();
 }
 class _HomePage1State extends State<HomePage1> {
+ /// var mainFood = foodMainPage(context);
+
   @override
   void initState(){
     super.initState();
     loadData();
     callApi();
+    Future.delayed(const Duration(seconds: 1), (){
+      setState(() {
+        // mainFood = 1.0;
+      });
+    });
   }
   bool? isLoading;
   String? stringResponse;
@@ -52,8 +59,9 @@ class _HomePage1State extends State<HomePage1> {
       appBar: AppBar(
         toolbarHeight: 90.0,
         iconTheme: IconThemeData(color: ColorsToBeUsed().primaryColor),
-        title: mapResponse == null ? const Text('data is null') : Text(
-          mapResponse!['text'].toString(),
+        title: Text("Welcome to FoodCo",
+        // mapResponse == null ? const Text('data is null') : Text(
+        //   mapResponse!['text'].toString(),
           // 'Welcome to Foodco',
           style: TextStyle(
             fontFamily: 'poppins',
@@ -82,7 +90,12 @@ class _HomePage1State extends State<HomePage1> {
         child: ScrollConfiguration(
           behavior: NoGlowBehaviour(),
           child:
-          isLoading!  ? ShimmerPage() : foodMainPage(),
+          isLoading!  ?  SizedBox(
+            height: MediaQuery.of(context).size.height  /  1.25,
+            child: Center(
+              child: CircularProgressIndicator(color: ColorsToBeUsed().mainColor,),
+            ),
+          ) : foodMainPage(context),
         ),
       ),
     );

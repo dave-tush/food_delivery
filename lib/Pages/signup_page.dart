@@ -63,6 +63,7 @@ class _FirstSignState extends State<FirstSign> {
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    bool showCircleProgressIndicator = true;
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
@@ -381,12 +382,35 @@ class _FirstSignState extends State<FirstSign> {
                 SizedBox(
                   height: 25,
                 ),
-                Buttons(
-                  pressedButton: signUpButton,
-                  text: 'Sign Up',
-                  buttonColor: ColorsToBeUsed().mainColor,
-                  color: ColorsToBeUsed().mainFontColor,
+                Material(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: ColorsToBeUsed().mainColor,
+                  child: InkWell(
+                    onTap: signUpButton,
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.015,
+                          bottom: MediaQuery.of(context).size.height * 0.015,
+                        ),
+                        child: showCircleProgressIndicator == true ? Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.height * 0.022,
+                            fontWeight: FontWeight.bold,
+                            color: ColorsToBeUsed().mainFontColor,
+                          ),
+                        ) :  CircularProgressIndicator(color: ColorsToBeUsed().primaryColor,),
+                      ),
+                    ),
+                  ),
                 ),
+                // Buttons(
+                //   pressedButton: signUpButton,
+                //   text: 'Sign Up',
+                //   buttonColor: ColorsToBeUsed().mainColor,
+                //   color: ColorsToBeUsed().mainFontColor,
+                // ),
                 SizedBox(
                   height: 25,
                 ),
@@ -425,15 +449,12 @@ class _FirstSignState extends State<FirstSign> {
   }
 
   Future signUpButton() async {
-    if (formKey.currentState!.validate() && _isChecked == false) {
-      showDialog(
-        context: context,
-        builder: (context) => Center(
-          child: CircularProgressIndicator(
-            color: ColorsToBeUsed().primaryColor,
-          ),
-        ),
-      );
+    if (formKey.currentState!.validate()) {
+      setState(() {
+        CircularProgressIndicator(
+          color: ColorsToBeUsed().primaryColor,
+        );
+      });
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailInput.text.trim(), password: passwordInput.text.trim());

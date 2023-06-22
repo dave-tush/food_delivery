@@ -23,13 +23,13 @@ class Buttons extends StatelessWidget {
         child: Center(
           child: Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 0.017,
-              bottom: MediaQuery.of(context).size.height * 0.017,
+              top: MediaQuery.of(context).size.height * 0.015,
+              bottom: MediaQuery.of(context).size.height * 0.015,
             ),
             child: Text(
               text,
               style: TextStyle(
-                fontSize: MediaQuery.of(context).size.height * 0.025,
+                fontSize: MediaQuery.of(context).size.height * 0.022,
                 fontWeight: FontWeight.bold,
                 color: color,
               ),

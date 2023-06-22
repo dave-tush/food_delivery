@@ -24,6 +24,7 @@ import 'Pages/my_order.dart';
 import 'Pages/my_order_2.dart';
 import 'Pages/single_burger.dart';
 import 'Pages/verification.dart';
+import 'animation.dart';
 import 'iconsss.dart';
 
 Future main() async {
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       initialRoute: '/',
       routes: {
+        '/animation': (context) => const Animations(),
         '/': (context) => MyHomePage(),
         '/Iconns': (context) => const Iconns(),
         '/DetailsPage' : (context) => const DetailsPage(),
